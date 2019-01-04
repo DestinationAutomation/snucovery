@@ -1,0 +1,24 @@
+sudo: required
+dist: xenial
+language: python
+python:
+- '3.7'
+addons:
+  apt:
+    update: true
+    packages:
+    - automake
+    - build-essential
+before_install:
+- pip install poetry
+before_script:
+- poetry install
+script:
+- poetry run pytest
+deploy:
+  provider: pypi
+  user: socrata
+  password:
+    secure: Yf22IfZycaAN7/kJB0+G6fy3aiNCOkdMBjrkMq1tEBrTad8etFwBGtCRgebjgIqROziQwDZyM0RqdA687QEz0ofS/ei6TIobp08dIIY0Pl8YioELt3thp9PwjkmTxHB3TgMHIte/HDpNnTCE43ihl+LADL0VPC97Mj0PThH3Jy3yQAKBASUgMpewNVa3LZRnSppH4xC+LcdEy5FoVveC+obHJkxMgPjqWJ0/SQbeHu3RPmQbomP3gkeMsIPbXDo07DhWfk4/AahKqGRivaQz3Az5WFVgstM2wt5gEg8c6wOaTiKtdVhjuvMp+sL1h2BR/cCTgdyxOsMUuQoK+i8nse0mdqqn9IA64FMYv0sw47soxiEJgyWbvy0W+xOYGDbbkBf1EdgBlSVjXx4M7i69meJzYZY5HVXSjq4lxtJOcPLTsylTW5XaWfPETOsLUBe7pcjA3mexk+Sdk9qPHla1bSBS82UU8oadXleJPjjN01rFNunXRYMUDRl5xsp3wMK6H4m6nNWZHoVpVeN5F3TEO0cvmzCmkrc7eTG3cwxI0YHm9KusyThMP5aMjVZiSwTaStFiCD7bHryPXIvMIpnJANQxxHMIDVcA7J/A+kLVS5p024x2u5a+ib0HxGoL03Z3sks8j7bWOmEfgJCBwA9x1gQyHwR6pdNeRNhi79jCC5Q=
+  on:
+    branch: master

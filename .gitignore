@@ -1,0 +1,29 @@
+*.pyc
+__pycache__
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+_build
+.cache
+*.so
+
+# Unit test / coverage reports
+.coverage
+.tox
+.pytest_cache
+
+.DS_Store
+.idea/*
+.vscode
+
+/setup.cfg
+MANIFEST.in
+/setup.py
+/docs/site/*
+.mypy_cache
+
+.venv
+/releases/*
