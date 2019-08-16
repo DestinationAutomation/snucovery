@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "snucovery"
-version = "0.1.1"
+version = "0.1.3"
 description = "Command Line utility to collect Aws Asset Data and export to Excel Stylesheets"
 authors = ["Johnny Martin <johnny.martin@tylertech.com>"]
 
