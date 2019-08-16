@@ -41,17 +41,17 @@ class AwsServices:
 
         self.service_mappings = {
             'ec2': {
-                'describe_instances': ".Reservations[].Instances[] | {Name: (.Tags[]|select(.Key==\"Name\")|.Value), InstanceId, InstanceType, Region: .Placement.AvailabilityZone, LaunchTime, PrivateDnsName, PrivateIpAddresses: [.NetworkInterfaces[].PrivateIpAddresses[].PrivateIpAddress], PublicIpAddress}",
-                'describe_vpcs': ".Vpcs[] | {Name: (.Tags[]|select(.Key==\"Name\")|.Value), VpcId, CidrBlock}"
+                'describe_instances': ".Reservations[].Instances[]? | {Name: (.Tags[]?|select(.Key==\"Name\")|.Value), InstanceId, InstanceType, Region: .Placement.AvailabilityZone, LaunchTime, PrivateDnsName, PrivateIpAddresses: [.NetworkInterfaces[].PrivateIpAddresses[].PrivateIpAddress], PublicIpAddress}",
+                'describe_vpcs': ".Vpcs[]? | {Name: (.Tags[]|select(.Key==\"Name\")|.Value), VpcId, CidrBlock}"
             },
             'elb': {
-                'describe_load_balancers': ".LoadBalancerDescriptions[] | {LoadBalancerName, DNSName}"
+                'describe_load_balancers': ".LoadBalancerDescriptions[]? | {LoadBalancerName, DNSName}"
             },
             'rds': {
-                'describe_db_instances': ".DBInstances[] | {DBName, AvailabilityZone, DBInstanceIdentifier, DBInstanceClass, Engine}"
+                'describe_db_instances': ".DBInstances[]? | {DBName, AvailabilityZone, DBInstanceIdentifier, DBInstanceClass, Engine}"
             },
             'elasticache': {
-                'describe_cache_clusters': ".CacheClusters[] | {CacheClusterId, CacheNodeType, Engine, PreferredAvailabilityZone}"
+                'describe_cache_clusters': ".CacheClusters[]? | {CacheClusterId, CacheNodeType, Engine, PreferredAvailabilityZone}"
             }
         }
 
