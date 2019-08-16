@@ -16,6 +16,7 @@ before_script:
 script:
 - poetry run pytest
 deploy:
+  skip_cleanup: true
   provider: pypi
   user: socrata
   password:
