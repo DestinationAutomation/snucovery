@@ -24,7 +24,7 @@ def main():
        excel = ExcelWorkbooks(args.workbook_name)
     except:
         timestr = time.strftime("%m:%d:%Y time %H %M %S")
-        excel = ExcelWorkbooks(str(os.getcwd()) + '/Inventory_Documentation/' + 'Nessus Snucovery Inventory ' + timestr)
+        excel = ExcelWorkbooks(str(os.getcwd()) + '/Inventory_Documentation/' + str(args.profile) + ' Nessus Snucovery Inventory' + timestr)
         #excel = ExcelWorkbooks("test")
     #else:
         
