@@ -28,7 +28,7 @@ Once installed, either from `pypi` or locally with `poetry`, usage is as follows
 
 ```sh
 snucovery -h
-usage: snucovery [-h] -p PROFILE -w WORKBOOK_NAME
+usage: snucovery [-h] -p PROFILE -w WORKBOOK_NAME 
 
 Aws Asset Discovery
 
@@ -41,6 +41,10 @@ optional arguments:
                         Name of the Excel Workbook that will be created
 snucovery -p my_aws_profile -w filtered_assets
 ls -al ./filtered_assets.xlsx
+
+snucovery -p my_aws_profile
+
+ls -al ./snucovery/Documented_Inventory/Nessus Snucovery Inventory ($Date) ($Time).xlsx
 ```
 
 ## Installation

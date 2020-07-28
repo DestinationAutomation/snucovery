@@ -26,7 +26,7 @@ class Arguments:
         self.parser.add_argument(
             '-w', '--workbook-name',
             help='Name of the Excel Workbook that will be created',
-            required=True
+            required=False
             )
 
     def get_args(self):

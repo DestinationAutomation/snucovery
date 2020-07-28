@@ -1,35 +1,35 @@
 import xlsxwriter
+import datetime
 from snucovery.errors import InvalidWorksheetName, WorksheetNotExists
 
 
 class ExcelWorkbooks:
     def __init__(self, workbook_name):
         """Create Excel Workbooks with tabbed sheets
-
         Full Excel workbook with formatted sheets similar subject data
-
         Args:
             workbook_name (str): Desired filename of the workbook to be created
-
         Self:
             workbook_name (str): Valid xlsx filename, `workbook_name`.xlsx
             workbook (obj): xlsxwriter.Workbook() object.
             worksheets (dict): Dict of worksheets to be created in the workbook
         """
         self.workbook_name = self.get_workbook_name(workbook_name)
+        #except:
+            #time_title = str(datetime.datetime.now().strftime("%d/%m/%Y_%H:%M:%S.xlsx"))
+        #self.workbook_name = "Nessus_Scan_Inventory_" + str(datetime.datetime.now().strftime("%d/%m/%Y_%H:%M:%S.xlsx"))
+        
+        #self.workbook_name = self.get_workbook_name(workbook_name)
         self.workbook = self.get_workbook()
         self.worksheets = dict()
 
     def create_workbook(self, workbook_name=None):
         """Instantiate a new Workbook to work on
-
         This creates the parent workbook that will be used for generating the
         workbook object.
-
         Args:
             workbook_name (str) Optional: Specify a new workbook name or fall
                                 back on self.workbook_name
-
         Returns:
             Object :: xlsxwriter.Workbook()
         """
@@ -40,14 +40,11 @@ class ExcelWorkbooks:
 
     def create_worksheet(self, worksheet_name):
         """Create a new worksheet with a specified worksheet_name
-
         When a new worksheet is created, it automatically adds it to the
         worksheets dict by calling self.add_new_worksheet().
-
         Args:
             worksheet_name (str): name of the worksheet to be created and added
                                   to the workbook
-
         Returns:
             Object
         """
@@ -59,11 +56,9 @@ class ExcelWorkbooks:
 
     def add_new_worksheet(self, worksheet_name, worksheet):
         """Update self.worksheets dict with the worksheet name and object
-
         Args:
             worksheet_name (str): name of the worksheet
             worksheet (obj): worksheet object to associate with the name
-
         Returns:
             Object :: worksheet object
         """
@@ -74,13 +69,10 @@ class ExcelWorkbooks:
 
     def set_workbook_name(self, workbook_name):
         """Returns a valid workbook name with the proper extension
-
         This will take `filename` or `filename.xlsx` and return a valid
         filename that contains the `.xlsx` file extension
-
         Args:
             workbook_name (str): workbook name
-
         Returns:
             String :: Valid filename for the excel workbook
         """
@@ -90,14 +82,11 @@ class ExcelWorkbooks:
 
     def get_workbook_name(self, workbook_name):
         """Reurns a valid workbook filename
-
         This might need to be reworked.
         Attempts to return self.workbook_name but if it doesnt exist, it will
         set the name based on the passed `workbook_name`
-
         Args:
             workbook_name (str): workbook name
-
         Returns:
             String :: Valid filename for the excel workbook
         """
@@ -111,10 +100,8 @@ class ExcelWorkbooks:
 
     def get_workbook(self):
         """Returns the current workbook or creates a new one if not exists
-
         Try and return the current instantiated workbook, if it doesnt exist,
         it will create a new workbook based on the instantiated `workbook_name`
-
         Returns:
             Object :: workbook object
         """
@@ -125,7 +112,6 @@ class ExcelWorkbooks:
 
     def get_worksheets(self):
         """Return worksheets dict
-
         Returns:
             Dict :: dict of all created worksheets
         """
@@ -133,10 +119,8 @@ class ExcelWorkbooks:
 
     def get_worksheet(self, worksheet_name):
         """Return a worksheet by name if it exists or raise exception
-
         Args:
             worksheet_name (str): worksheet name to return
-
         Returns:
             Try to return the worksheet if it exists or raise exception for
             WorksheetNotExists
@@ -148,9 +132,7 @@ class ExcelWorkbooks:
 
     def set_header_formatting(self):
         """Returns bold formatting for headers
-
         Bolden the headers of the workbook
-
         Returns:
             Object :: workbook.add_format()
         """
@@ -158,11 +140,9 @@ class ExcelWorkbooks:
 
     def create_header(self, worksheet_name, header, col, width, sort=True):
         """Create a header in a specific column on row 0 and set col width
-
         This creates a header on the first row of a worksheet.  It also sets
         the width of the column and if `sort` is True, make the columns
         sortable.
-
         Args:
             worksheet_name (str): name of the worksheet to add the header to
             header (str): string to set the cell text to for the header
@@ -178,11 +158,9 @@ class ExcelWorkbooks:
 
     def create_headers_from_dict(self, worksheet_name, header_dict):
         """Create all headers for a worksheet based on a dict
-
         This iterates through the dictionary and sets a key for the cell header
         and creates a width based on the key or value, depending on what the
         value is.
-
         Args:
             worksheet_name (str): name of the worksheet to create the headers
                                   on
@@ -196,16 +174,13 @@ class ExcelWorkbooks:
 
     def get_header_width(self, key, value):
         """Get the width of the header based on the key or the value
-
         The width of the header gets set based on key if a value isnt set. If
         a value exists, it will set the width to +10 of the value width.  If
         value is a list(), it will set the width to twice the width of a string
         plus 10.
-
         Args:
             key (str): key of the headers
             value (str or list): value
-
         Returns:
             Int :: width to set the header to
         """
@@ -219,10 +194,8 @@ class ExcelWorkbooks:
 
     def add_row_to_worksheet(self, worksheet, row_data, row_counter):
         """Add a new row to the worksheet
-
         Iterate through a row of data in dict format and starting at col == 0,
         increment through the items and place the value in the specified cell
-
         Args:
             worksheet (str): name of a valid worksheet
             row_data (dict): dictionary of key: values where the key is the
@@ -237,9 +210,7 @@ class ExcelWorkbooks:
 
     def add_rows_to_worksheet_from_json(self, worksheet_name, worksheet_data):
         """Take a JSON doc and fill a worksheet with the data
-
         Pass a dictionary and iterate through it to fill the desired worksheet
-
         Args:
             worksheet_name (str): valid worksheet name
             worksheet_data (dict): dictionary or json doc to iterate through

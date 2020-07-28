@@ -1,7 +1,10 @@
 import pyjq
+import time
+import os
 from snucovery.cli import Arguments
 from snucovery.aws import AwsServices
 from snucovery.excel import ExcelWorkbooks
+from snucovery.easy_print import printer
 
 
 def main():
@@ -15,8 +18,16 @@ def main():
     items = aws.scan_services()
 
     # Create a new workbook based on the workbook name
-    excel = ExcelWorkbooks(args.workbook_name)
-
+    if not os.path.exists(str(os.getcwd()) + '/Inventory_Documentation'):
+        os.makedirs(str(os.getcwd()) + '/Inventory_Documentation/')
+    try:
+       excel = ExcelWorkbooks(args.workbook_name)
+    except:
+        timestr = time.strftime("%m:%d:%Y time %H %M %S")
+        excel = ExcelWorkbooks(str(os.getcwd()) + '/Inventory_Documentation/' + 'Nessus Snucovery Inventory ' + timestr)
+        #excel = ExcelWorkbooks("test")
+    #else:
+        
     service_mappings = aws.get_service_mappings()
 
     # Iterate through the aws service mappings
@@ -38,6 +49,7 @@ def main():
                 pass
 
     excel.close()
+    printer(excel.workbook_name)
 
 
 if __name__ == '__main__':
